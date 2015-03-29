@@ -1,0 +1,11 @@
+<html>
+<head></head>
+<body>
+<h2>Results for poll: {{ poll.question }}</h2>
+<ul>
+{% for choice in poll.choice_set.all %}
+    <li>{{ choice.choice_text }}</li>
+{% endfor %}
+</ul>
+</body>
+</html>
