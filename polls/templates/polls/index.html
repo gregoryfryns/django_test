@@ -1,6 +1,7 @@
-<html>
-<head></head>
-<body>
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+
 <h1>Poll list</h1>
 {% if latest_poll_list %}
     <ul>
@@ -11,5 +12,4 @@
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
-</body>
-</html>
+
