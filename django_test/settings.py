@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'polls',
+    'welcomepage',
 #    'oauth_tokens',
 #    'taggit',
 #    'twitter-api',
