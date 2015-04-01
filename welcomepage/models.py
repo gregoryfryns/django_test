@@ -2,7 +2,7 @@ from django.db import models
 import urllib, json, datetime
 
 # Create your models here.
-class Weather(forms.Form):
+class Weather:
     def __init__(self, zipcode, country_code):
         url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipcode + "," + country_code
         response = urllib.urlopen(url);
