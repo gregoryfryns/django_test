@@ -37,9 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'polls',
-    'oauth_tokens',
-    'taggit',
-    'twitter-api',
+#    'oauth_tokens',
+#    'taggit',
+#    'twitter-api',
 )
 
 MIDDLEWARE_CLASSES = (
