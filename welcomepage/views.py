@@ -5,7 +5,7 @@ from welcomepage.models import Weather
 def welcomepage(request):
     try:
         zipcode = request.GET['zipcode']
-        country_code = request.POST['countrycode']
+        country_code = request.GET['countrycode']
     except:
         zipcode = "94025"
         country_code = "US"

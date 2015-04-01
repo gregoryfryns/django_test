@@ -3,11 +3,11 @@
 <h1>Welcome</h1>
 
 <form action="{% url 'welcomepage:home' %}" method="get">
-    Zip code:
+    <label>Zip code</label>
     <input type="text" name="zipcode" value="{{zipcode}}" /><br />
-    Country code:
+    <label>Country code</label>
     <input type="text" name="countrycode" value="{{country_code}}" /><br />
-<input type="submit" />
+    <input type="submit" value="Update location" />
 </form>
 
 <img src="http://openweathermap.org/img/w/{{weather_report.iconId}}.png" alt="{{weather_report.description}}"><br />
