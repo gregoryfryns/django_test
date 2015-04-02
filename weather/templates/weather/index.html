@@ -1,0 +1,23 @@
+<html>
+<body>
+    <h3>Current weather</h3>
+
+    <form action="{% url 'weather:report' %}" method="get">
+        <label>Zip code</label>
+        <input type="text" name="zipcode" value="{{zipcode}}" /><br />
+        <label>Country code</label>
+        <input type="text" name="countrycode" value="{{country_code}}" /><br />
+        <input type="submit" value="Update location" />
+    </form>
+
+    {% if weather_report.error_msg != None %}
+        <p>{{weather_report.error_msg}}</p>
+    {% else %}
+        <p>
+        <img src="http://openweathermap.org/img/w/{{weather_report.iconId}}.png" alt="{{weather_report.description}}" height="50" width="50"><br />
+        Location: {{weather_report.location}}<br />
+        Temperature: {{weather_report.temperature_celsius}}°C - {{weather_report.temperature_fahrenheit}}°F<br />
+        </p>
+    {% endif %}
+</body>
+</html>
