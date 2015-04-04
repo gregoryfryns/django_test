@@ -9,7 +9,7 @@ class Weather:
             response = urllib.urlopen(url);
             data = json.loads(response.read())
         except:
-            self.error_msg = "Could not connect to the weather report service!"
+            self.error_msg = "Could not connect to the weather report service, please try again!"
         else:
             if data["cod"] != 200:
                 self.error_msg = "Could not load weather report for " + zipcode + ", " + country_code
