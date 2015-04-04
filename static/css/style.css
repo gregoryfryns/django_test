@@ -8,7 +8,10 @@
    designer's written permission. However, feel free to study the CSS and use 
    techniques you learn from it elsewhere. */
 
-
+@font-face {
+    font-family: "Bootle";
+    src: url('../fonts/bootle.ttf');
+}
 body
     {
     margin: 0;
@@ -29,7 +32,7 @@ a:hover
 
 .summary h3, .skills h3, .experience h3, .education h3, .apps-selection h3
     {
-    text-indent: 100%;
+	font-family: "Bootle", Impact;
     white-space: nowrap;
     overflow: hidden;
     }
@@ -38,62 +41,73 @@ a:hover
 .apps-selection h3.select {
     display: none;
 }
-
+*/
 .page-wrapper
     {
     margin: 0 auto;
     width: 724px;
     position: relative;
     background: #fff;
-    padding: 0 10px 0 10px;
+    padding: 0 10px 20px 10px;
     text-align: left;
-    }
-* html .page-wrapper
+	}
+.intro
     {
-    width: 744px;
-    width: 724px;
-    }
-
+	height: 225px;
+	}
 header
     {
     position: absolute;
     top: 25px;
     left: 40px;
     }
+	
+.summary
+    {
+	position: absolute;
+    top: 65px;
+    right: 20px;
+    margin: 0;
+    background-color: #307082;
+	border-radius: 10px;
+	border-left: 20px;
+    color: #fff;
+    height: 160px;
+	width: 685px;
+    text-align: left;
+    padding: 0 10px 0 10px;
+    line-height: 26px;
+	font-size: 12px;
+    }
+	
 h1
     {
-    background: url("logo.gif");
+    font-family: "Bootle", Impact;
     width: 156px;
     height: 25px;
     overflow: hidden;
     margin: 0;
-
-    text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
     }
+
 h2
     {
+	font-family: "Bootle", Impact;
     font-size: 12px;
     margin: 0;
+    }
+	
+h3
+    {
+    font-size: 12px;
+    font-family: "Bootle", Impact;
+	 margin: 0;
     }
 
-.summary
-    {
-    padding-top: 85px;
-    }
-.summary p:last-child
-    {
-    font-size: 12px;
-    position: absolute;
-    top: 65px;
-    right: 20px;
-    margin: 0;
-    }
-.page-wrapper .intro .summary p:first-child
+.page-wrapper .intro .summary p
     {
     font-size: 11px;
-    background: url("background.jpg") no-repeat;
     margin: 0;
     width: 164px;
     height: 141px;
@@ -101,8 +115,7 @@ h2
     color: #fff;
     font: 12px/150% Trebuchet MS;
     }
-
-.preamble, .supporting
+.supporting
     {
     margin: 0 20px 0 243px;
     }
@@ -111,37 +124,13 @@ h2
     line-height: 150%;
     margin: 10px 0 10px 0;
     }
- .preamble h3, .explanation h3, .participation h3, .benefits h3, .requirements h3
+.skills h3, .experience h3, .education h3
     {
     width: 200px;
     height: 24px;
     margin: 40px 0 10px 0;
     }
-.preamble h3
-    {
-    background: url("heading01.gif") no-repeat;
-    }
-.explanation h3
-    {
-    background: url("heading02.gif") no-repeat;
-    }
-.participation h3
-    {
-    background: url("heading03.gif") no-repeat;
-    }
-.benefits h3
-    {
-    background: url("heading04.gif") no-repeat;
-    }
-.requirements h3
-    {
-    background: url("heading05.gif") no-repeat;
-    }
-.requirements
-    {
-    margin-bottom: 40px;
-    }
-*/
+
 .sidebar
     {
     position: absolute;
@@ -149,6 +138,11 @@ h2
     left: 0;
     width: 210px;
     }
+
+.apps-selection h3
+    {
+	padding: 0 0 0 40px;
+	}
 .apps-selection ul
     {
     list-style-type: none;
@@ -177,17 +171,19 @@ h2
     font-size: 12px;
     border-bottom: 1px solid #E6EEF0;
     }
-/*
+
 footer
     {
-    background: url("footer.gif") no-repeat;
+    background-color: #307082;
+	border-radius: 10px;
     color: #fff;
-    height: 48px;
+    height: 25px;
     text-align: right;
     padding: 0 10px 0 0;
     line-height: 26px;
     font-size: 11px;
     }
+
 footer a
     {
     color: #fff;
@@ -197,4 +193,3 @@ footer a:hover
     {
     text-decoration: underline;
     }
-*/
