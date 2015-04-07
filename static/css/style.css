@@ -1,21 +1,6 @@
-/* css Zen Garden submission 175 - 'Business Style', by Gunta Klavina, http://www.klavina.com/ */
+/* Inspired by http://www.csszengarden.com/175/, by Gunta Klavina, http://www.klavina.com/ */
 /* css released under Creative Commons License - http://creativecommons.org/licenses/by-nc-sa/1.0/  */
-/* All associated graphics copyright 2005, Gunta Klavina */
-/* Added: July 9th, 2005 */
 
-/* IMPORTANT */
-/* This design is not a template. You may not reproduce it elsewhere without the 
-   designer's written permission. However, feel free to study the CSS and use 
-   techniques you learn from it elsewhere. */
-
-@font-face {
-    font-family: "Bootle";
-    src: url('../fonts/bootle.ttf');
-}
-@font-face {
-    font-family: "TimeBurner";
-    src: url('../fonts/timeburner_regular.ttf');
-}
 body
     {
     margin: 0;
@@ -36,7 +21,7 @@ a:hover
 
 .summary h3, .skills h3, .experience h3, .education h3, .apps-selection h3
     {
-	font-family: "Bootle", Impact;
+	font-family: "Oswald", Impact;
     white-space: nowrap;
     overflow: hidden;
     }
@@ -76,13 +61,13 @@ header
     text-align: left;
     padding: 0 10px 0 10px;
     line-height: 26px;
-	font-size: 12px;
+	font-size: 14px;
     }
 	
 h1
     {
-    font-family: "TimeBurner", Impact;
-	font-size: 23px;
+    font-family: "Oswald", Impact;
+	font-size: 25px;
     width: 156px;
     height: 35px;
     overflow: hidden;
@@ -93,21 +78,21 @@ h1
 
 h2
     {
-	font-family: "Bootle", Impact;
-    font-size: 12px;
+	font-family: "Oswald", Impact;
+    font-size: 16px;
     margin: 0;
     }
 	
 h3
     {
-    font-size: 12px;
-    font-family: "Bootle", Impact;
+    font-size: 16px;
+    font-family: "Oswald", Impact;
 	 margin: 0;
     }
 
 .page-wrapper .intro .summary p
     {
-    font-size: 11px;
+    font-size: 12px;
     margin: 0;
     width: 164px;
     height: 141px;
@@ -159,12 +144,11 @@ h3
 .apps-selection ul li:hover
     {
 	background-color: #307082;
-	color: #fff;
  	}
-.apps-selection ul li:hover a
+.apps-selection ul li:hover
     {
     text-decoration: none;
-    color: #ddd;
+    color: #fff;
      }
 
 .apps-selection ul li.c
@@ -173,7 +157,7 @@ h3
     font-size: 12px;
     color: #333;
     }
-.apps-selection ul li a
+.apps-selection ul a
     {
     text-decoration: none;
     }
