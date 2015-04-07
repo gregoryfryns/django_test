@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Gregory Fryns - Home page</title>
+	<title>{% block title %}Gregory Fryns - Home page{% endblock %}</title>
 	
 	<link href='http://fonts.googleapis.com/css?family=Oswald:400' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" media="screen" href="../static/css/style.css">
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="author" content="Gregory Fryns">
 	<meta name="description" content="A test website using Django">
@@ -20,26 +21,29 @@
 <body id="homepage">
 <div class="page-wrapper">
 
+    {% block intro %}
 	<section class="intro" id="gfryns-intro">
 		<header role="banner">
 			<h1>Gregory Fryns</h1>
 		</header>
 
-		<div class="summary" id="gfryns-summary" role="article">
+		<div class="summary" id="gfryns-summary">
 			<p>Computer science engineer specialized in customer support...</p>
 		</div>
 
 	</section>
-
-	<div class="main supporting" id="gfryns-main" role="main">
-		<div class="skills" id="gfryns-skills" role="article">
+    {% endblock %}
+    {% block supporting %}
+	<div class="main supporting" id="gfryns-main">
+        {% block main-contents %}
+		<div class="skills" id="gfryns-skills">
 			<h3>Skill 1</h3>
 			<p>Description 1</p>
             <h3>Skill 2</h3>
 			<p>Description 2</p>
 		</div>
 
-		<div class="experience" id="gfryns-experience" role="article">
+		<div class="experience" id="gfryns-experience">
 			<h2>Position 1</h2>
             <h3>Company 1</h3>
             <h3>Dates 1</h3>
@@ -50,27 +54,28 @@
             </ul>
 		</div>
 
-		<div class="education" id="gfryns-education" role="article">
+		<div class="education" id="gfryns-education">
 			<h2>Degree 1</h2>
             <h3>University 1</h3>
             <h3>Dates 1</h3>
 		</div>
-
+        {% endblock %}
+        {% block footer %}
 		<footer class="gfryns-footer">
 			<a href="http://validator.w3.org/check/referer" title="Check the validity of this site&#8217;s HTML" class="validate-html">HTML</a>
 			<a href="http://jigsaw.w3.org/css-validator/check/referer" title="Check the validity of this site&#8217;s CSS" class="validate-css">CSS</a>
 			<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" title="View the Creative Commons license of this site: Attribution-NonCommercial-ShareAlike." class="license">CC</a>
 			<a href="https://github.com/gregoryfryns/django_test" title="Fork this site on Github" class="github">GH</a>
 		</footer>
-
+        {% endblock %}
 	</div>
-
-
-	<aside class="sidebar" role="complementary">
+    {% endblock %}
+    {% block sidebar %}
+	<aside class="sidebar">
 		<div class="wrapper">
 
 			<div class="apps-selection" id="apps-selection">
-				<h3 class="select">Select an application:</h3>
+				<h3 class="select">Select an application</h3>
 				<nav role="navigation">
 					<ul>
 					<a href="{% url 'polls:index' %}" class="application-name"><li>Polls</li></a>
@@ -79,7 +84,7 @@
 				</nav>
 			</div>
 	</aside>
-
+    {% endblock %}
 </div>
 </body>
 </html>

@@ -1,8 +1,8 @@
-{% load staticfiles %}
+{% extends "home.html" %}
+{% block title %}Gregory Fryns - Polls{% endblock %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
-
-<h1>Poll list</h1>
+{% block main-contents %}
+<h2>Poll list</h2>
 {% if latest_poll_list %}
     <ul>
     {% for poll in latest_poll_list %}
@@ -13,3 +13,4 @@
     <p>No polls are available.</p>
 {% endif %}
 
+{% endblock %}
