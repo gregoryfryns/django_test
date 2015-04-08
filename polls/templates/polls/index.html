@@ -2,15 +2,16 @@
 {% block title %}Gregory Fryns - Polls{% endblock %}
 
 {% block main-contents %}
-<h2>Poll list</h2>
-{% if latest_poll_list %}
-    <ul>
-    {% for poll in latest_poll_list %}
-        <li><a href="{% url 'polls:detail' poll.id %}">{{ poll.question }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
-
+	<div class="polls">
+	<h2>Poll list</h2>
+	{% if latest_poll_list %}
+	    <ul>
+	    {% for poll in latest_poll_list %}
+	        <li><a href="{% url 'polls:detail' poll.id %}">{{ poll.question }}</a></li>
+	    {% endfor %}
+	    </ul>
+	{% else %}
+	    <p>No polls are available.</p>
+	{% endif %}
+	</div>
 {% endblock %}

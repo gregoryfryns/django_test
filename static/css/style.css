@@ -2,12 +2,19 @@
 /* Inspired by http://www.csszengarden.com/175/, by Gunta Klavina, http://www.klavina.com/ */
 /* css released under Creative Commons License - http://creativecommons.org/licenses/by-nc-sa/1.0/  */
 
+html
+    {
+        /* avoid horizontal hops due to the scroll bar */
+        min-height: 100%;
+        margin-bottom: 1px;
+    }
+
 body
     {
     margin: 0;
     padding: 0;
     color: #333;
-    font: 13px Trebuchet Mhttp://fonts.googleapis.com/css?family=Oswald:400S, Lucida Sans Unicode, Arial, sans-serif;
+    font: 13px Trebuchet, Lucida Sans Unicode, Arial, sans-serif;
     background: #E2EBED;
     text-align: center;
     }
@@ -20,48 +27,39 @@ a:hover
     color: #D60808;
     }
 
-.summary h3, .skills h3, .experience h3, .education h3, .apps-selection h3
-    {
-	font-family: 'Oswald', Impact;
-    white-space: nowrap;
-    overflow: hidden;
-    }
-
 .page-wrapper
     {
-    margin: 0 auto;
-    width: 724px;
     position: relative;
+    max-width: 724px;
+    margin: 0 auto;
     background: #fff;
-    padding: 0 10px 20px 10px;
+    padding: 0 10px 20px;
     text-align: left;
 	}
 .intro
     {
-	height: 220px;
-    width: 250px;
+	height: 260px;
+    max-width: 724px;
 	}
 header
     {
-    position: absolute;
+    position: relative;
     top: 25px;
     left: 40px;
     }
 	
 .summary
     {
-	position: absolute;
-    top: 65px;
-    right: 20px;
-    margin: 0;
+	position: relative;
+    top: 50px;
+    margin: 0 auto;
     background-color: #307082;
 	border-radius: 10px;
-	border-left: 20px;
     color: #fff;
     height: 160px;
-	width: 685px;
+	max-width: 685px;
     text-align: left;
-    padding: 0 10px 0 10px;
+    padding: 0 10px;
     line-height: 26px;
 	font-size: 14px;
     }
@@ -89,7 +87,13 @@ h3
     {
     font-size: 16px;
     font-family: 'Oswald', Impact;
-	 margin: 0;
+	margin: 0;
+    }
+
+.page-wrapper .intro header h1 a
+    {
+     text-decoration: none;
+     color: #333;
     }
 
 .page-wrapper .intro .summary p
@@ -104,26 +108,32 @@ h3
     }
 .supporting
     {
-    margin: 0 20px 0 243px;
+    position: relative;
+    top: 0;
+    right: 0;
+    max-width: 445px;
+    margin-left: 270px;
     }
 .supporting p, .preamble p
     {
     line-height: 150%;
     margin: 10px 0 10px 0;
     }
-.skills h3, .experience h3, .education h3
+.supporting div h3
     {
+    white-space: nowrap;
+    overflow: hidden;
     width: 200px;
     height: 24px;
-    margin: 40px 0 10px 0;
+    margin: 20px 0 10px 0;
     }
 
 .sidebar
     {
     position: absolute;
-    top: 260px;
+    top: 265px;
     left: 0;
-    width: 210px;
+    max-width: 210px;
     }
 
 .apps-selection h3
@@ -174,6 +184,7 @@ footer
     padding: 0 10px 0 0;
     line-height: 26px;
     font-size: 11px;
+    margin-top: 10px;
     }
 
 footer a

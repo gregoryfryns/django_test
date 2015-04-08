@@ -71,6 +71,8 @@ WSGI_APPLICATION = 'django_test.wsgi.application'
 #    }
 #}
 
+
+
 DATABASES = {}
 # Parse database configuration from $DATABASE_URL
 import dj_database_url

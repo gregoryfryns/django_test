@@ -1,6 +1,8 @@
-<html>
-<body>
-    <h3>Current weather</h3>
+{% extends "home.html" %}
+{% block title %}Gregory Fryns - Weather report{% endblock %}
+
+{% block main-contents %}
+    <h2>Current weather</h2>
 
     <form action="{% url 'weather:report' %}" method="get">
         <label>Zip code</label>
@@ -19,5 +21,4 @@
         Temperature: {{weather_report.temperature_celsius}}°C - {{weather_report.temperature_fahrenheit}}°F<br />
         </p>
     {% endif %}
-</body>
-</html>
+{% endblock %}
