@@ -2,7 +2,6 @@
 {% block title %}Gregory Fryns - Polls{% endblock %}
 
 {% block main-contents %}
-	<div class="polls">
 	<h2>Poll list</h2>
 	{% if latest_poll_list %}
 	    <ul>
@@ -13,5 +12,4 @@
 	{% else %}
 	    <p>No polls are available.</p>
 	{% endif %}
-	</div>
 {% endblock %}
