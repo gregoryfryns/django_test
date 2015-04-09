@@ -66,7 +66,7 @@ header
 	
 h1
     {
-    font-family: 'Oswald', Impact;
+    font-family: 'Oswald', Verdana, Geneva, sans-serif;
 	font-size: 25px;
     height: 35px;
     overflow: hidden;
@@ -77,15 +77,15 @@ h1
 
 h2
     {
-	font-family: 'Oswald', Impact;
+	font-family: 'Oswald', Verdana, Geneva, sans-serif;
     font-size: 16px;
     margin: 0;
     }
 	
 h3
     {
+    font-family: 'Oswald', Verdana, Geneva, sans-serif;
     font-size: 16px;
-    font-family: 'Oswald', Impact;
 	margin: 0;
     }
 
@@ -108,7 +108,7 @@ h3
 .supporting
     {
     position: relative;
-    top: 0;
+    top: 6px;
     right: 0;
     max-width: 445px;
     margin-left: 270px;
@@ -118,7 +118,7 @@ h3
     line-height: 150%;
     margin: 10px 0 10px 0;
     }
-.supporting div h3
+.supporting div h2
     {
     white-space: nowrap;
     overflow: hidden;
@@ -126,7 +126,6 @@ h3
     height: 24px;
     margin: 20px 0 10px 0;
     }
-
 .sidebar
     {
     position: absolute;
@@ -135,15 +134,16 @@ h3
     max-width: 210px;
     }
 
-.apps-selection h3
+.apps-selection h2
     {
-	padding: 0 0 0 40px;
+	padding-left: 40px;
 	}
 .apps-selection ul
     {
     list-style-type: none;
     margin: 0;
-    padding: 5px 0 10px 40px;
+    padding-top: 5px;
+    padding-bottom: 10px;
     }
 .apps-selection ul li
     {
@@ -172,7 +172,46 @@ h3
     {
     text-decoration: none;
     }
-	
+form fieldset
+    {
+    border-style: none;   
+    }
+
+form fieldset input[type=text] 
+    {
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    }
+form fieldset input[type=text]:focus 
+    {
+    border-color: #307082;
+    }
+form fieldset input[type=submit] 
+    {
+    padding: 5px 15px; 
+    background: #307082; 
+    border: 2px solid #307082; 
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+    color: #fff;
+    }
+form fieldset input[type=submit]:hover
+    {
+    -moz-box-shadow: 0px 0px 10px #307082;
+    -webkit-box-shadow: 0px 0px 10px #307082;
+    box-shadow: 0px 0px 10px #307082;
+    }
+form fieldset .input-zip-code
+    {
+    width: 60px;
+    }
+form fieldset .input-country-code
+    {
+    width: 24px;
+    }
 footer
     {
     background-color: #307082;

@@ -4,12 +4,12 @@
 {% block main-contents %}
     <h2>Current weather</h2>
 
-    <form action="{% url 'weather:report' %}" method="get">
-        <label>Zip code</label>
-        <input type="text" name="zipcode" value="{{zipcode}}" /><br />
-        <label>Country code</label>
-        <input type="text" name="countrycode" value="{{country_code}}" /><br />
-        <input type="submit" value="Update location" />
+    <form class="weather-form" action="{% url 'weather:report' %}" method="get">
+        <fieldset>
+                <input class="input-zip-code" type="text" name="zipcode" value="{{zipcode}}" placeholder="Zip code">
+                <input class="input-country-code" type="text" name="countrycode" value="{{country_code}}" placeholder="Country code">
+                <input class="input-submit" type="submit" value="Update location">
+        </fieldset>
     </form>
 
     {% if weather_report.error_msg != None %}
