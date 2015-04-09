@@ -1,5 +1,5 @@
 """
-Django settings for django_test project.
+Django settings for personal_website project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -52,9 +52,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'django_test.urls'
+ROOT_URLCONF = 'personal_website.urls'
 
-WSGI_APPLICATION = 'django_test.wsgi.application'
+WSGI_APPLICATION = 'personal_website.wsgi.application'
 
 
 # Database
@@ -73,10 +73,9 @@ WSGI_APPLICATION = 'django_test.wsgi.application'
 
 
 
-DATABASES = {}
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+DATABASES = {'default': dj_database_url.config(default='postgres://postgres:password@localhost:5432/mydb')}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
