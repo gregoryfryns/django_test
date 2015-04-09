@@ -176,19 +176,24 @@ form fieldset
     {
     border-style: none;   
     }
-
-form fieldset input[type=text] 
+form fieldset .input-item
+    {
+    display: inline-block;
+    text-align: left;
+    margin: 5px 10px 0 0;
+    }
+form fieldset .input-item input[type=text] 
     {
     padding:5px; 
     border:2px solid #ccc; 
     -webkit-border-radius: 5px;
     border-radius: 5px;
     }
-form fieldset input[type=text]:focus 
+form fieldset .input-item input[type=text]:focus 
     {
     border-color: #307082;
     }
-form fieldset input[type=submit] 
+form fieldset .input-item input[type=submit] 
     {
     padding: 5px 15px; 
     background: #307082; 
@@ -198,17 +203,17 @@ form fieldset input[type=submit]
     border-radius: 5px; 
     color: #fff;
     }
-form fieldset input[type=submit]:hover
+form fieldset .input-item input[type=submit]:hover
     {
     -moz-box-shadow: 0px 0px 10px #307082;
     -webkit-box-shadow: 0px 0px 10px #307082;
     box-shadow: 0px 0px 10px #307082;
     }
-form fieldset .input-zip-code
+form fieldset .input-item .input-zip-code
     {
     width: 60px;
     }
-form fieldset .input-country-code
+form fieldset .input-item .input-country-code
     {
     width: 24px;
     }

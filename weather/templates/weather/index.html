@@ -6,9 +6,18 @@
 
     <form class="weather-form" action="{% url 'weather:report' %}" method="get">
         <fieldset>
-                <input class="input-zip-code" type="text" name="zipcode" value="{{zipcode}}" placeholder="Zip code">
-                <input class="input-country-code" type="text" name="countrycode" value="{{country_code}}" placeholder="Country code">
+            <div class="input-item">
+                <label>Zip code</label><br />
+                <input class="input-zip-code" type="text" name="zipcode" value="{{zipcode}}" placeholder="94025">
+            </div>
+            <div class="input-item">
+                <label>Country code</label><br />
+                <input class="input-country-code" type="text" name="countrycode" value="{{country_code}}" placeholder="US">
+            </div>
+            <div class="input-item">
                 <input class="input-submit" type="submit" value="Update location">
+            </div>
+
         </fieldset>
     </form>
 
