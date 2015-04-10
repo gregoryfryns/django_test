@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'polls',
     'weather',
+    'imageconv',
 #    'oauth_tokens',
 #    'taggit',
 #    'twitter-api',
@@ -59,20 +60,6 @@ WSGI_APPLICATION = 'personal_website.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'mydb',
-#        'USER': 'postgres',
-#        'PASSWORD': 'password',
-#        'HOST': '127.0.0.1',
-#        'PORT': '5432',
-#    }
-#}
-
-
-
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 DATABASES = {'default': dj_database_url.config(default='postgres://postgres:password@localhost:5432/mydb')}
@@ -111,3 +98,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Media file folders (for uploads)
+MEDIA_ROOT = '/home/gregory/Documents/github/personal_website/media/'
+MEDIA_URL = '/media/'
