@@ -100,5 +100,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Media file folders (for uploads)
-MEDIA_ROOT = '/home/gregory/Documents/github/personal_website/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# 1MB - 1048576
+# 2.5MB - 2621440
+# 5MB - 5242880
+# 10MB - 10485760
+MAX_UPLOAD_SIZE = "1048576"

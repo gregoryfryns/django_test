@@ -5,25 +5,25 @@
         <title>Minimal Django File Upload Example</title>   
     </head>
     <body>
-    <!-- List of uploaded documents -->
-    {% if documents %}
+    <!-- List of uploaded images >
+    {% if images %}
         <ul>
-        {% for document in documents %}
-            <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+        {% for image in images %}
+            <li><a href="{{ image.docfile.url }}">{{ image.docfile.name }}</a></li>
         {% endfor %}
         </ul>
     {% else %}
-        <p>No documents.</p>
+        <p>No images.</p>
     {% endif %}
-
+-->
         <!-- Upload form. Note enctype attribute! -->
         <form action="{% url 'imageconv:list' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
-            <p>{{ form.file.label_tag }} {{ form.file.help_text }}</p>
+            <p>{{ form.upload_image.label_tag }} {{ form.upload_image.help_text }}</p>
             <p>
-                {{ form.file.errors }}
-                {{ form.file }}
+                {{ form.upload_image.errors }}
+                {{ form.upload_image }}
             </p>
             <p><input type="submit" value="Upload" /></p>
         </form>

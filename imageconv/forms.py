@@ -1,7 +1,7 @@
 from django import forms
 
-class ImageUploadForm(forms.Form):
-    file = forms.FileField(
-        label='Select a picture',
+class FileUploadForm(forms.Form):
+    upload_image = forms.ImageField(
+        label='Select a file',
         help_text='max. 2 megabytes'
     )
