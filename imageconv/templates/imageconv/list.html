@@ -27,5 +27,17 @@
             </p>
             <p><input type="submit" value="Upload" /></p>
         </form>
+        <div>
+        <p>uploaded image name: {{image.name}}</p>
+        <p>uploaded image size: {{image.size}}</p>
+        <p>uploaded image content type: {{image.content_type}}</p>
+        </div>
+        <div>
+        <p>max upload size: {{max_size}}</p>
+        </div>
+
+         {% if error_msg != None %}
+        <p>error_msg</p>
+        {% endif %}   
     </body>
 </html>
