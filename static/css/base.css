@@ -53,6 +53,11 @@ h3
     font-size: 16px;
 	margin: 0;
     }
+
+p.error_msg
+    {
+    color: red;
+    }
     
 .page-wrapper
     {

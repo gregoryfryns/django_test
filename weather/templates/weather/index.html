@@ -21,13 +21,14 @@
         </fieldset>
     </form>
 
-    {% if weather_report.error_msg != None %}
-        <p>{{weather_report.error_msg}}</p>
+    {% if error_msg != None %}
+        <p class="error_msg">{{error_msg}}</p>
     {% else %}
         <p>
-        <img src="http://openweathermap.org/img/w/{{weather_report.iconId}}.png" alt="{{weather_report.description}}" height="50" width="50"><br />
-        Location: {{weather_report.location}}<br />
-        Temperature: {{weather_report.temperature_celsius}}°C - {{weather_report.temperature_fahrenheit}}°F<br />
+        <img src="{{icon_url}}" alt="{{description}}" height="50" width="50"><br />
+        Location: {{location}}<br />
+        Temperature: {{temp_celsius}}°C - {{temp_fahrenheit}}°F<br />
+        Description: {{description}}<br />
         </p>
     {% endif %}
 {% endblock %}
