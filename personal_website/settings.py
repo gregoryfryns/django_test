@@ -39,9 +39,6 @@ INSTALLED_APPS = (
     'polls',
     'weather',
     'imageconv',
-#    'oauth_tokens',
-#    'taggit',
-#    'twitter-api',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -71,14 +68,25 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 #ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
-#import os
-#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-#STATIC_ROOT = 'staticfiles'
-#STATIC_URL = '/static/'
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.6/howto/static-files/
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_URL = '/static/'
+
+# Media file folders (for uploads)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# 150 kB - 153600
+# 1MB - 1048576
+# 2.5MB - 2621440
+# 5MB - 5242880
+# 10MB - 10485760
+MAX_UPLOAD_SIZE = "153600"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -93,19 +101,5 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
-STATIC_URL = '/static/'
-
-# Media file folders (for uploads)
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
-# 150 kB - 153600
-# 1MB - 1048576
-# 2.5MB - 2621440
-# 5MB - 5242880
-# 10MB - 10485760
-MAX_UPLOAD_SIZE = "153600"
+# Sessions lifespan definition
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

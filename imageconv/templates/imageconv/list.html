@@ -1,43 +1,30 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Minimal Django File Upload Example</title>   
-    </head>
-    <body>
-    <!-- List of uploaded images >
-    {% if images %}
-        <ul>
-        {% for image in images %}
-            <li><a href="{{ image.docfile.url }}">{{ image.docfile.name }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No images.</p>
-    {% endif %}
--->
-        <!-- Upload form. Note enctype attribute! -->
+{% extends "home.html" %}
+{% block title %}Gregory Fryns - Image conversion{% endblock %}
+
+{% block main-contents %}
+
+        <h2>Image upload</h2>
+
         <form action="{% url 'imageconv:list' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
-            <p>{{ form.upload_image.label_tag }} {{ form.upload_image.help_text }}</p>
-            <p>
-                {{ form.upload_image.errors }}
-                {{ form.upload_image }}
-            </p>
+            <p>{{ form.upload_image.label_tag }} {{ form.upload_image.help_text }} {{ form.upload_image }}</p>
+
+            {% if form.upload_image.errors != None %}
+            <p class='error_msg'>{{ form.upload_image.errors }}</p>
+            {% endif %}
+
             <p><input type="submit" value="Upload" /></p>
         </form>
         <div>
-        <p>uploaded image name: {{image.name}}</p>
-        <p>uploaded image size: {{image.size}}</p>
-        <p>uploaded image content type: {{image.content_type}}</p>
-        </div>
-        <div>
-        <p>max upload size: {{max_size}}</p>
+        {% if image_url != None %}
+        <img src="{{image_url}}" />
+        <p>Image name: {{image_name}}</p>
+        <p>Image size: {{image_size}}</p>
+        {% endif %}
         </div>
 
          {% if error_msg != None %}
-        <p>error_msg</p>
+        <p class='error_msg'>{{error_msg}}</p>
         {% endif %}   
-    </body>
-</html>
+{% endblock %}

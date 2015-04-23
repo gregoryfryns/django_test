@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from weather.models import AbstractWeatherReport, OpenWeatherMapReport
+from weather.models import OpenWeatherMapReport
 
 # Create your views here.
 def weather(request):
@@ -20,6 +20,12 @@ def weather(request):
     icon_url = weather_report.get_icon_url()
     description = weather_report.get_description()
 
-    context = {'error_msg': error_msg, 'location': location, 'temp_celsius': temp_celsius,'temp_fahrenheit': temp_fahrenheit, 'icon_url': icon_url, 'description': description}
+    context = {'error_msg': error_msg,
+               'location': location,
+               'temp_celsius': temp_celsius,
+               'temp_fahrenheit': temp_fahrenheit,
+               'icon_url': icon_url,
+               'description': description
+    }
     return render(request, 'weather/index.html', context)
 

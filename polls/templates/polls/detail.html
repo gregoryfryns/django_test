@@ -5,7 +5,7 @@
 	<div class="poll-detail">
 		<h2>{{ poll.question }}</h2>
 
-		{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+		{% if error_message %}<p class="error_msg">{{ error_message }}</p>{% endif %}
 
 		<form class="vote-form" action="{% url 'polls:vote' poll.id %}" method="post">
 		{% csrf_token %}
