@@ -54,7 +54,7 @@ h3
 	margin: 0;
     }
 
-p.error_msg, ul.errorlist p
+p.error_msg, ul.errorlist
     {
     color: red;
     }
