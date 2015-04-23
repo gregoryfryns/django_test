@@ -54,7 +54,7 @@ h3
 	margin: 0;
     }
 
-p.error_msg
+p.error_msg, ul.errorlist p
     {
     color: red;
     }
@@ -220,7 +220,7 @@ input[type=text]:focus
     border-color: #307082;
     }
 
-input[type=submit] 
+input[type=submit]
     {
     padding: 5px 15px; 
     background: #307082; 
@@ -269,4 +269,12 @@ footer a
 footer a:hover
     {
     text-decoration: underline;
+    }
+
+/* Specific styles for the imageconv application */
+/* To be moved to the app folder? */
+
+div.latest_picture img
+    {
+    width: 150px;
     }

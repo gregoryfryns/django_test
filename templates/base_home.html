@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +6,9 @@
 	<title>{% block title %}{% endblock %}</title>
 	
 	<link href='http://fonts.googleapis.com/css?family=Oswald:400' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" media="screen" href="/static/css/reset.css">
-	<link rel="stylesheet" media="screen" href="/static/css/base.css">
-	{% block more_stylesheets %}{% endblock %}
-	{% block scripts %}{% endblock %}
+	<link rel="stylesheet" media="screen" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" media="screen" href="{% static 'css/base.css' %}">
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="author" content="Gregory Fryns">
 	<meta name="description" content="A test website using Django">
