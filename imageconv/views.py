@@ -13,7 +13,7 @@ def list(request):
     error_msg = None
     image_name = None
     image_size = None
-    image_path = None
+    image_url = None
 
     if 'error_msg' in request.session:
         error_msg = request.session['error_msg']
@@ -26,7 +26,7 @@ def list(request):
         image_size = request.session['image_size']
 
     if 'image_path' in request.session:
-        image_path = request.session['image_path']
+        image_url = settings.MEDIA_URL + request.session['image_path']
 
     # Handle the file uploaded via the form
     if request.method == 'POST':
@@ -51,7 +51,7 @@ def list(request):
     # Render list page with the image info
     context = {'image_name': image_name,
                'image_size': image_size,
-               'image_url': settings.MEDIA_URL + image_path,
+               'image_url': image_url,
                'form': form,
                'error_msg': error_msg,
                'max_upload_size': sizeof_fmt(int(settings.MAX_UPLOAD_SIZE))
