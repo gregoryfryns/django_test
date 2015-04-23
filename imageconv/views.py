@@ -16,10 +16,6 @@ def imageconv(request):
     image_size = None
     image_url = None
 
-    if 'error_msg' in request.session:
-        error_msg = request.session['error_msg']
-        del request.session['error_msg']
-
     if 'image_name' in request.session:
         image_name = request.session['image_name']
 
@@ -51,7 +47,6 @@ def imageconv(request):
                'image_size': image_size,
                'image_url': image_url,
                'form': form,
-               'error_msg': error_msg,
                'max_upload_size': filesizeformat(settings.MAX_UPLOAD_SIZE)
 
     }

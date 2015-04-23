@@ -101,5 +101,5 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Sessions lifespan definition
+# Sessions lifespan
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True

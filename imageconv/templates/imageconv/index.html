@@ -6,7 +6,7 @@
 
         <form action="{% url 'imageconv:upload' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <p class='error_msg'>{{ form.non_field_errors }}</p>
+            <p>{{ form.non_field_errors }}</p>
             <p>{{ form.upload_image.label_tag }}{{ form.upload_image.help_text }}</p>
             <p>{{ form.upload_image }}{{ form.upload_image.errors }}</p>
 
@@ -20,7 +20,4 @@
         {% endif %}
         </div>
 
-         {% if error_msg != None %}
-        <p class='error_msg'>{{error_msg}}</p>
-        {% endif %}   
 {% endblock %}
