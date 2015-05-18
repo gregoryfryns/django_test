@@ -14,10 +14,10 @@ django-twitter-api==0.2.5
 easy-thumbnails==2.2
 gunicorn==19.3.0
 oauthlib==0.7.2
-Pillow==2.7.0
+Pillow==2.8.1
 psycopg2==2.6
 requests==2.6.0
 requests-oauthlib==0.4.2
 six==1.9.0
 static3==0.5.1
-
+tweepy==3.3.0

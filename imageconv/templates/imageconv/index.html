@@ -14,9 +14,13 @@
         </form>
         <div class="latest_picture">
         {% if image_url != None %}
-        <img src="{{image_url}}" />
-        <p>Image name: {{image_name}}</p>
+        <img src="{{image_url}}" alt="{{image_name}}" />
+        <p>Image name: {{image_name}}{{image_ext}}</p>
         <p>Image size: {{image_size}}</p>
+        {% endif %}
+
+        {% if filter_path != None %}
+        <img src="{{filter_path}}" />
         {% endif %}
         </div>
 
