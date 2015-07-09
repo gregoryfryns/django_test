@@ -4,60 +4,70 @@ from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import filesizeformat
 
-from imageconv.models import UploadedImage
+from imageconv.models import UploadedImage, apply_filter
 from imageconv.forms import ImageUploadForm
 
 from django.conf import settings
+import django_rq
 
 def imageconv(request):
+    # List of filters to be applied
+    applied_filters = ['BLUR', 
+                        'CONTOUR', 
+                        'DETAIL']
+
     # Get information of the last image uploaded by the user from the session
-    error_msg = None
     image_name = None
     image_ext = None
     image_size = None
     image_url = None
-    filter_path = None
 
     if 'image_name' in request.session:
         image_name = request.session['image_name']
 
     if 'image_ext' in request.session:
-        image_name = request.session['image_ext']
+        image_ext = request.session['image_ext']
 
     if 'image_size' in request.session:
         image_size = request.session['image_size']
 
-    if 'image_path' in request.session:
-        image_url = settings.MEDIA_URL + request.session['image_path']
-
-    if 'filter_path' in request.session:
-        filter_path = request.session['filter_path']
+    if 'image_url' in request.session:
+        image_url = settings.MEDIA_URL + request.session['image_url']
 
     # Handle the file uploaded via the form
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
             image = UploadedImage(form.cleaned_data['upload_image'])
-            image.save()
             
-            request.session['image_name'] = image.get_name() + image.get_ext()
+            request.session['image_name'] = image.get_name()
             request.session['image_size'] = filesizeformat(image.get_size())
-            request.session['image_path'] = image.get_path()
-            request.session['filter_path'] = image.filter("FIND_EDGES")
+            request.session['image_url'] = image.get_path()
+            request.session['image_ext'] = image.get_ext()
+
+            pickled_img = {
+                'path': image.get_path(),
+                'name': image.get_name(),
+                'ext': image.get_ext(),
+            }
+
+            for filter_name in applied_filters :
+                # apply filter using background process
+                apply_filter.delay(pickled_img, filter_name)
 
             # Redirect to the document imageconv after POST
             return HttpResponseRedirect(reverse('imageconv:upload'))
     else:
         form = ImageUploadForm() # A empty, unbound form
 
-
     # Render page with the image info
     context = {'image_name': image_name,
                'image_size': image_size,
                'image_url': image_url,
-               'filter_path': filter_path,
+               'image_ext': image_ext,
+               'applied_filters': applied_filters,
                'form': form,
-               'max_upload_size': filesizeformat(settings.MAX_UPLOAD_SIZE)
+               'max_upload_size': filesizeformat(settings.MAX_UPLOAD_SIZE),
     }
 
     return render_to_response(

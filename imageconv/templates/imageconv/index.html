@@ -12,16 +12,29 @@
 
             <p><input type="submit" value="Upload image" /></p>
         </form>
-        <div class="latest_picture">
+
         {% if image_url != None %}
-        <img src="{{image_url}}" alt="{{image_name}}" />
-        <p>Image name: {{image_name}}{{image_ext}}</p>
-        <p>Image size: {{image_size}}</p>
-        {% endif %}
+        <div class="tabs">
+            <ul class="tab-links">
+                <li class="active"><a href="#default">No filter</a></li>
+                {% for filter in applied_filters %}
+                    <li><a href="#{{ filter }}">{{ filter }}</a></li>
+                {% endfor %}
+            </ul>
+         
+            <div class="tab-content">
+                <div id="default" class="tab active">
+                    <p>{{image_name}}{{image_ext}}</p>
+                    <img src="{{ image_url }}" alt="{{image_name}}" />
+                </div>
 
-        {% if filter_path != None %}
-        <img src="{{filter_path}}" />
-        {% endif %}
+                {% for filter in applied_filters %}
+                    <div id="{{ filter }}" class="tab">
+                        <p>{{ image_name }}_{{ filter }}{{image_ext}}</p>
+                         <img src="{{ image_url }}_filters/{{image_name}}_{{ filter }}{{ image_ext }}" alt="{{ image_name }}_{{ filter }}{{image_ext}}" />
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-
+        {% endif %}
 {% endblock %}

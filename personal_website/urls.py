@@ -15,3 +15,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^imageconv/', include('imageconv.urls', namespace="imageconv")),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += patterns('',
+    (r'^django-rq/', include('django_rq.urls')),
+)

@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_rq',
     'polls',
     'weather',
     'imageconv',
@@ -56,16 +57,44 @@ WSGI_APPLICATION = 'personal_website.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES = {'default': dj_database_url.config(default='postgres://postgres:password@localhost:5432/mydb')}
+#DATABASES = {'default': dj_database_url.config(default='postgres://postgres:password@localhost:5432/mydb')}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mydb',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
 #ALLOWED_HOSTS = ['*']
+
+# Django-RQ configuration
+RQ_QUEUES = {
+    'default': {
+        'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379'),
+        'DB': 0,
+        'DEFAULT_TIMEOUT': 360,
+    },
+    'high': {
+        'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379'),
+        'DB': 0,
+        'DEFAULT_TIMEOUT': 500,
+    },
+    'low': {
+        'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379'),
+        'DB': 0,
+    }
+}
 
 # Static asset configuration
 import os
@@ -86,7 +115,7 @@ MEDIA_URL = '/media/'
 # 2.5MB - 2621440
 # 5MB - 5242880
 # 10MB - 10485760
-MAX_UPLOAD_SIZE = "153600"
+MAX_UPLOAD_SIZE = "2621440"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

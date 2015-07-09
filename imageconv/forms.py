@@ -14,7 +14,7 @@ class RestrictedImageField(forms.ImageField):
         try:
             if data.size > int(self.max_upload_size):
                 raise forms.ValidationError(
-                    ('File size must be under %(max_size)s. Current file size is %(current_size)s.'),
+                    ('File size must be under %(max_size)s. The uploaded file is %(current_size)s.'),
                     code='invalid size',
                     params={'max_size':filesizeformat(self.max_upload_size), 
                             'current_size':filesizeformat(data.size)},
