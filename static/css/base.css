@@ -72,14 +72,18 @@ p.error_msg, ul.errorlist
 /* Header */
 .intro
     {
-	height: 260px;
+	height: 180px;
     max-width: 724px;
+    margin: auto;
+    clear: both;
 	}
+
 header
     {
     position: relative;
     top: 25px;
     left: 40px;
+    width: 80%;
     }
 	
 .summary
@@ -90,12 +94,10 @@ header
     background-color: #307082;
 	border-radius: 10px;
     color: #fff;
-    height: 160px;
 	max-width: 685px;
     text-align: left;
     padding: 0 10px;
     line-height: 26px;
-	font-size: 14px;
     }
 	
 .intro header h1 a
@@ -106,20 +108,18 @@ header
 
 .intro .summary p
     {
-    font-size: 12px;
     margin: 0;
-    width: 164px;
-    height: 50px;
-    padding: 30px 530px 0 30px;
+    padding: 20px 30px;
     color: #fff;
-    font: 12px/150% Trebuchet MS;
+    font: 14px/150% Trebuchet MS;
+    font-weight:400;
     }
 
    /* Content */
 .supporting
     {
     position: relative;
-    top: 6px;
+    top: 10px;
     right: 0;
     max-width: 445px;
     margin-left: 270px;
@@ -147,7 +147,7 @@ header
 .sidebar
     {
     position: absolute;
-    top: 265px;
+    top: 190px;
     left: 0;
     max-width: 210px;
     }
@@ -170,6 +170,7 @@ header
     font-size: 14px;
     border-bottom: 1px solid #E6EEF0;
 	height: 18px;
+    font-weight:400;
     }
 .apps-selection ul li:hover
     {

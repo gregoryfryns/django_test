@@ -49,12 +49,13 @@ def apply_filter(pickled_img, option):
 
     im = Image.open(settings.MEDIA_ROOT + '/' + pickled_img['path'])
 
-    filters_dir = pickled_img['path'] + '_filters'
+    # filters_dir = pickled_img['path'] + '_filters'
 
-    if not os.path.exists(settings.MEDIA_ROOT + '/' + filters_dir):
-        os.makedirs(settings.MEDIA_ROOT + '/' + filters_dir)
+    # if not os.path.exists(settings.MEDIA_ROOT + '/' + filters_dir):
+    #     os.makedirs(settings.MEDIA_ROOT + '/' + filters_dir)
 
-    filter_path = filters_dir + '/' + pickled_img['name'] + '_' + option + pickled_img['ext']
+    filter_path = pickled_img['path'] + "_" + option + pickled_img['ext']
+    # filter_path = filters_dir + '/' + pickled_img['name'] + '_' + option + pickled_img['ext']
     # filter_path = '%(path)s/%(name)s_%(option)s%(ext)s' % \
     #     {"path": filters_dir, "name": pickled_img['name'], "option": option, "ext": pickled_img['ext']}
 
