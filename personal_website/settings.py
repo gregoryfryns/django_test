@@ -107,8 +107,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_URL = '/static/'
 
 # Media file folders (for uploads)
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'tmp/media')
+MEDIA_URL = '/tmp/media/'
 
 # 150 kB - 153600
 # 1MB - 1048576

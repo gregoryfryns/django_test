@@ -11,7 +11,8 @@ from django_rq import job
 class UploadedImage(models.Model):
     def __init__(self, image_file):
         # TODO: save image with original name
-        self.path = default_storage.save('uploaded_images/', ContentFile(image_file.read()))
+        self.absolute_path = default_storage.save(settings.MEDIA_ROOT + '/', ContentFile(image_file.read()))
+        # self.path = default_storage.save(settings.MEDIA_ROOT + '/', temp_file)
         self.name, self.extension = os.path.splitext(image_file.name)
         self.size = image_file.size
 
@@ -30,8 +31,11 @@ class UploadedImage(models.Model):
     def get_format(self):
         return self.format
 
-    def get_path(self):
-        return self.path
+    def get_absolute_path(self):
+        return self.absolute_path
+
+    def get_temp_file_name(self):
+        return self.absolute_path[len(settings.MEDIA_ROOT)+1:]
 
 @job
 def apply_filter(pickled_img, option):
@@ -47,19 +51,20 @@ def apply_filter(pickled_img, option):
                 SMOOTH_MORE and SHARPEN
     """
 
-    im = Image.open(settings.MEDIA_ROOT + '/' + pickled_img['path'])
+    im = Image.open(pickled_img['absolute_path'])
+    # im = Image.open(pickled_img['path'])
 
     # filters_dir = pickled_img['path'] + '_filters'
 
     # if not os.path.exists(settings.MEDIA_ROOT + '/' + filters_dir):
     #     os.makedirs(settings.MEDIA_ROOT + '/' + filters_dir)
 
-    filter_path = pickled_img['path'] + "_" + option + pickled_img['ext']
+    filter_absolute_path = pickled_img['absolute_path'] + "_" + option + pickled_img['ext']
     # filter_path = filters_dir + '/' + pickled_img['name'] + '_' + option + pickled_img['ext']
     # filter_path = '%(path)s/%(name)s_%(option)s%(ext)s' % \
     #     {"path": filters_dir, "name": pickled_img['name'], "option": option, "ext": pickled_img['ext']}
 
-    if not os.path.isfile(settings.MEDIA_ROOT + '/' + filter_path):
+    if not os.path.isfile(filter_absolute_path):
         if option == 'BLUR':
             im = im.filter(ImageFilter.BLUR)
         elif option == 'CONTOUR':
@@ -81,9 +86,9 @@ def apply_filter(pickled_img, option):
         elif option == 'SHARPEN':
             im = im.filter(ImageFilter.SHARPEN)
         else:
-            return settings.MEDIA_URL + pickled_img['path']
+            return pickled_img['path']
 
     # Save file with absolute URL
-    im.save(settings.MEDIA_ROOT + '/' + filter_path)
+    im.save(filter_absolute_path)
     # Return relative URL
-    return settings.MEDIA_URL + filter_path
+    return filter_absolute_path

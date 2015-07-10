@@ -20,7 +20,7 @@ def imageconv(request):
     image_name = None
     image_ext = None
     image_size = None
-    image_url = None
+    image_tempfile = None
 
     if 'image_name' in request.session:
         image_name = request.session['image_name']
@@ -31,8 +31,8 @@ def imageconv(request):
     if 'image_size' in request.session:
         image_size = request.session['image_size']
 
-    if 'image_url' in request.session:
-        image_url = settings.MEDIA_URL + request.session['image_url']
+    if 'image_tempfile' in request.session:
+        image_tempfile = settings.MEDIA_URL + request.session['image_tempfile']
 
     # Handle the file uploaded via the form
     if request.method == 'POST':
@@ -42,11 +42,11 @@ def imageconv(request):
             
             request.session['image_name'] = image.get_name()
             request.session['image_size'] = filesizeformat(image.get_size())
-            request.session['image_url'] = image.get_path()
+            request.session['image_tempfile'] = image.get_temp_file_name()
             request.session['image_ext'] = image.get_ext()
 
             pickled_img = {
-                'path': image.get_path(),
+                'absolute_path': image.get_absolute_path(),
                 'name': image.get_name(),
                 'ext': image.get_ext(),
             }
@@ -63,7 +63,7 @@ def imageconv(request):
     # Render page with the image info
     context = {'image_name': image_name,
                'image_size': image_size,
-               'image_url': image_url,
+               'image_tempfile': image_tempfile,
                'image_ext': image_ext,
                'applied_filters': applied_filters,
                'form': form,
