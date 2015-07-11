@@ -11,6 +11,8 @@ from django_rq import job
 class UploadedImage(models.Model):
     def __init__(self, image_file):
         # TODO: save image with original name
+        if not os.path.exists(settings.MEDIA_ROOT):
+            os.makedirs(settings.MEDIA_ROOT)
         self.absolute_path = default_storage.save(settings.MEDIA_ROOT + '/', ContentFile(image_file.read()))
         # self.path = default_storage.save(settings.MEDIA_ROOT + '/', temp_file)
         self.name, self.extension = os.path.splitext(image_file.name)
