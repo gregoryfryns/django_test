@@ -17,6 +17,11 @@ First make sure the requirements are fulfilled:
 - postgresql 
 - image libraries (libjpeg-dev, zlib1g-dev, libpng12-dev)
 - redis (redis-server)
+- the following environment variables are defined:
+    - SECRET_KEY : Django secret key
+    -   AWS_ACCESS_KEY : Amazon AWS credentials
+    -   AWS_SECRET_KEY : Amazon AWS credentials
+    -   S3_BUCKET : S3 bucket where the temporary files will be stored. A policy has to be created to make all the objects created in this bucket public. Also, it is recommended to set an expiration period for all the objects in the bucket to avoid filling up all the available memory.
 
 Clone the repository to your computer
 ```
