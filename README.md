@@ -7,7 +7,7 @@ Here are some details about the applications you'll find here:
 
 - *polls*: this application is the one explained in the Django tutorial (https://docs.djangoproject.com/en/1.7/intro/tutorial01/). It shows how to get data from a form and store it in a database, and how to retrieve data from the database and display it on a web page.
 - *weather*: this application is just a test to use web based services (REST - JSON) in Python
-- *imageconv*: the aim of this application is to use a form to load media files, use form validation and use a background process to handle time-consuming tasks.
+- *imageconv*: the aim of this application is to use a form to load media files, use form validation and use a background process to handle time-consuming tasks. It also stores temporary files to Amazon S3.
 
 *** Getting started ***
 First make sure the requirements are fulfilled:
