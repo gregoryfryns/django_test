@@ -9,7 +9,7 @@ Here are some details about the applications you'll find here:
 - *weather*: this application is just a test to use web based services (REST - JSON) in Python
 - *imageconv*: the aim of this application is to use a form to load media files, use form validation and use a background process to handle time-consuming tasks. It also stores temporary files to Amazon S3.
 
-*** Getting started ***
+** Getting started **
 
 First make sure the requirements are fulfilled:
 - Python 2.7
@@ -44,7 +44,7 @@ Run the local server using foreman
 foreman start
 ```
 
-Once done, you can leave the virtual environmant using this command
+Once done, you can leave the virtual environment using this command
 ```
 deactivate
 ```
