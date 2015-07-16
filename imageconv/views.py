@@ -14,10 +14,8 @@ from imageconv.forms import ImageUploadForm
 def imageconv(request):
     # List of filters to be applied
     applied_filters = ['BLUR', 
-                        'CONTOUR', 
-                        'DETAIL']
-    # applied_filters = [{'name': 'coucou','url': 'gamin'}]
-    # applied_filters.append({'name': 'coucou2', 'url': 'gamin2'})
+                        'CONTOUR',
+                        'EMBOSS']
 
     # Get information of last uploaded image from the session
     image_name = None
@@ -63,11 +61,6 @@ def imageconv(request):
 
                 # Send job to worker process
                 apply_filter.delay(pickled_img, filter_name, filter_s3_path)
-                # filtr = {
-                #     'name': filter_name,
-                #     'url': settings.AWS_S3_BASE_URL + filter_s3_path,
-                # }
-                # applied_filters.append({'name': filter_name, 'url': settings.AWS_S3_BASE_URL + filter_s3_path})
 
             # Redirect to the document imageconv after POST
             return HttpResponseRedirect(reverse('imageconv:upload'))

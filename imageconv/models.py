@@ -1,6 +1,7 @@
 import os
 import boto3
 from boto3.session import Session
+from io import BytesIO
 
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
@@ -56,8 +57,8 @@ class UploadedImage(models.Model):
 
 @job
 def apply_filter(pickled_img, option, target_url):
-    """Apply Pillow module's filter to the image given as an argument and saves the
-    modified at the path returned.
+    """Apply Pillow module's filter to the image given as an argument and saves the newly
+    created image in the Amazon S3 bucket, under the path given as target_url.
     The arguments are :
         - pickled_img: a dictinary containing the following elements
                 'local_path': image path on the local drive
@@ -72,10 +73,6 @@ def apply_filter(pickled_img, option, target_url):
 
     im = Image.open(pickled_img['local_path'])
 
-    # filename, ext = os.path.splitext(pickled_img['img_s3_path'])
-    # target_url = filename + "_" + option + ext
-
-    # if not os.path.isfile(filter_local_path):
     if option == 'BLUR':
         im = im.filter(ImageFilter.BLUR)
     elif option == 'CONTOUR':
@@ -97,14 +94,42 @@ def apply_filter(pickled_img, option, target_url):
     elif option == 'SHARPEN':
         im = im.filter(ImageFilter.SHARPEN)
     else:
-        raise NotImplementedError('Option "' + option + '" cannot be applied to the image!')
+        raise NotImplementedError('Filter "' + option + '" cannot be applied to the image!')
 
-    # Save result in the S3 bucket
+    # Save result in Amazon S3 bucket
     session = Session(aws_access_key_id=settings.AWS_ACCESS_KEY,
               aws_secret_access_key=settings.AWS_SECRET_KEY,
               region_name=settings.REGION_NAME)
     s3 = session.resource('s3')
-    bitstream = im.tobytes()
-    s3.Bucket(settings.S3_BUCKET).put_object(Key=target_url, Body=bitstream)
-    # Return relative URL
+    cimage = BytesIO()
+    im.save(cimage, format=guess_image_format(pickled_img['ext']))
+    s3.Bucket(settings.S3_BUCKET).put_object(Key=target_url, Body=cimage.getvalue())
+
     return target_url
+
+def guess_image_format(ext):
+    ext_dict = {
+        ".bmp": "BMP",
+        ".dib": "BMP",
+        ".dcx": "DCX",   
+        ".eps": "EPS",
+        ".ps" : "EPS",
+        ".gif": "GIF",
+        ".im" : "IM",
+        ".jpg": "JPEG",
+        ".jpe": "JPEG",
+        ".jpeg": "JPEG",
+        ".pcd": "PCD",
+        ".pcx": "PCX",
+        ".pdf": "PDF",
+        ".png": "PNG",
+        ".pbm": "PPM",
+        ".pgm": "PPM",
+        ".ppm": "PPM",
+        ".psd": "PSD",
+        ".tif": "TIFF",
+        ".tiff": "TIFF",
+        ".xbm": "XBM",
+        ".xpm": "XPM",
+    }
+    return ext_dict[ext]
