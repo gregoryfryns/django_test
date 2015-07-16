@@ -20,9 +20,9 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ['DJANGO_DEBUG']
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = os.environ['TEMPLATE_DEBUG']
 
 ALLOWED_HOSTS = ['*']
 
