@@ -1,3 +1,7 @@
+import os
+import django_rq
+from django.conf import settings
+
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
@@ -7,32 +11,31 @@ from django.template.defaultfilters import filesizeformat
 from imageconv.models import UploadedImage, apply_filter
 from imageconv.forms import ImageUploadForm
 
-from django.conf import settings
-import django_rq
-
 def imageconv(request):
     # List of filters to be applied
     applied_filters = ['BLUR', 
                         'CONTOUR', 
                         'DETAIL']
+    # applied_filters = [{'name': 'coucou','url': 'gamin'}]
+    # applied_filters.append({'name': 'coucou2', 'url': 'gamin2'})
 
-    # Get information of the last image uploaded by the user from the session
+    # Get information of last uploaded image from the session
     image_name = None
-    image_ext = None
+    image_extension = None
     image_size = None
-    image_tempfile = None
+    image_s3_dir = None
 
     if 'image_name' in request.session:
         image_name = request.session['image_name']
 
-    if 'image_ext' in request.session:
-        image_ext = request.session['image_ext']
+    if 'image_extension' in request.session:
+        image_extension = request.session['image_extension']
 
     if 'image_size' in request.session:
         image_size = request.session['image_size']
 
-    if 'image_tempfile' in request.session:
-        image_tempfile = settings.MEDIA_URL + request.session['image_tempfile']
+    if 'image_s3_dir' in request.session:
+        image_s3_dir = request.session['image_s3_dir']
 
     # Handle the file uploaded via the form
     if request.method == 'POST':
@@ -40,20 +43,31 @@ def imageconv(request):
         if form.is_valid():
             image = UploadedImage(form.cleaned_data['upload_image'])
             
+            # Store new info in session
             request.session['image_name'] = image.get_name()
             request.session['image_size'] = filesizeformat(image.get_size())
-            request.session['image_tempfile'] = image.get_temp_file_name()
-            request.session['image_ext'] = image.get_ext()
+            request.session['image_s3_dir'] = settings.AWS_S3_BASE_URL + os.path.split(image.get_s3_path())[0]
+            request.session['image_extension'] = image.get_ext()
 
+            # Prepare image for handling by worker process
             pickled_img = {
-                'absolute_path': image.get_absolute_path(),
+                'local_path': image.get_local_path(),
                 'name': image.get_name(),
                 'ext': image.get_ext(),
             }
 
             for filter_name in applied_filters :
-                # apply filter using background process
-                apply_filter.delay(pickled_img, filter_name)
+                # Build s3 url to be used
+                filename, ext = os.path.splitext(image.get_s3_path())
+                filter_s3_path = filename + "_" + filter_name + ext
+
+                # Send job to worker process
+                apply_filter.delay(pickled_img, filter_name, filter_s3_path)
+                # filtr = {
+                #     'name': filter_name,
+                #     'url': settings.AWS_S3_BASE_URL + filter_s3_path,
+                # }
+                # applied_filters.append({'name': filter_name, 'url': settings.AWS_S3_BASE_URL + filter_s3_path})
 
             # Redirect to the document imageconv after POST
             return HttpResponseRedirect(reverse('imageconv:upload'))
@@ -63,8 +77,8 @@ def imageconv(request):
     # Render page with the image info
     context = {'image_name': image_name,
                'image_size': image_size,
-               'image_tempfile': image_tempfile,
-               'image_ext': image_ext,
+               'image_s3_dir': image_s3_dir,
+               'image_extension': image_extension,
                'applied_filters': applied_filters,
                'form': form,
                'max_upload_size': filesizeformat(settings.MAX_UPLOAD_SIZE),

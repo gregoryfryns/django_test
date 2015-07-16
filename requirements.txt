@@ -2,6 +2,8 @@ Django==1.7.7
 Pillow==2.8.1
 argparse==1.2.1
 beautifulsoup4==4.3.2
+boto3==1.1.0
+botocore==1.1.2
 click==4.0
 dj-database-url==0.3.0
 dj-static==0.0.6
@@ -15,10 +17,14 @@ django-rq==0.8.0
 django-taggit==0.12.3
 django-toolbelt==0.0.1
 django-twitter-api==0.2.5
+docutils==0.12
 easy-thumbnails==2.2
+futures==2.2.0
 gunicorn==19.3.0
+jmespath==0.7.1
 oauthlib==0.7.2
 psycopg2==2.6
+python-dateutil==2.4.2
 redis==2.10.3
 requests==2.6.0
 requests-oauthlib==0.4.2

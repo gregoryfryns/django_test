@@ -2,10 +2,10 @@
 Django settings for personal_website project.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
+https://docs.djangoproject.com/en/1.7/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
+https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -14,10 +14,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'jg_-g)3!(xt(k2j=0hid(fa+16hjgc*=h(+5wh=q79kt0*k7s%'
+SECRET_KEY = os.environ['SECRET_KEY']
+# SECRET_KEY = 'jg_-g)3!(xt(k2j=0hid(fa+16hjgc*=h(+5wh=q79kt0*k7s%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -60,23 +61,20 @@ WSGI_APPLICATION = 'personal_website.wsgi.application'
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES = {'default': dj_database_url.config(default='postgres://postgres:password@localhost:5432/mydb')}
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'mydb',
-#         'USER': 'postgres',
-#         'PASSWORD': 'password',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
+# DATABASES = {'default': dj_database_url.config(default='postgres://postgres:password@localhost:5432/mydb')}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mydb',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Allow all host headers
-#ALLOWED_HOSTS = ['*']
 
 # Django-RQ configuration
 RQ_QUEUES = {
@@ -95,6 +93,13 @@ RQ_QUEUES = {
         'DB': 0,
     }
 }
+
+# Amazon AWS configuration
+AWS_ACCESS_KEY = os.environ['AWS_ACCESS_KEY']
+AWS_SECRET_KEY = os.environ['AWS_SECRET_KEY']
+REGION_NAME = 'us-west-1'
+S3_BUCKET = os.environ['S3_BUCKET'] # Object created in this bucket will be deleted after 1 day
+AWS_S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/gfryns-webpage/'
 
 # Static asset configuration
 import os

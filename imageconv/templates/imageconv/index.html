@@ -13,26 +13,25 @@
             <p><input type="submit" value="Upload image" /></p>
         </form>
 
-        {% if image_tempfile != None %}
+        {% if image_s3_dir != None %}
         <div class="tabs">
             <ul class="tab-links">
                 <li class="active"><a href="#default">No filter</a></li>
-                {% for filter in applied_filters %}
-                    <li><a href="#{{ filter }}">{{ filter }}</a></li>
+                {% for filtr in applied_filters %}
+                    <li><a href="#{{ filtr }}">{{ filtr }}</a></li>
                 {% endfor %}
             </ul>
          
             <div class="tab-content">
                 <div id="default" class="tab active">
-                    <p>{{image_name}}{{image_ext}}</p>
-                    <img src="{{ image_tempfile }}" alt="{{image_name}}" />
+                    <p>{{image_name}}{{image_extension}}</p>
+                    <img src="{{image_s3_dir}}/{{image_name}}{{image_extension}}" alt="{{image_name}}{{image_extension}}" />
                 </div>
 
-                {% for filter in applied_filters %}
-                    <div id="{{ filter }}" class="tab">
-                        <p>{{ image_name }}_{{ filter }}{{image_ext}}</p>
-                         <!-- <img src="{{ image_tempfile }}_filters/{{image_name}}_{{ filter }}{{ image_ext }}" alt="{{ image_name }}_{{ filter }}{{image_ext}}" /> -->
-                         <img src="{{ image_tempfile }}_{{ filter }}{{ image_ext }}" alt="{{ image_url }}_{{ filter }}{{ image_ext }}" />
+                {% for filtr in applied_filters %}
+                    <div id="{{filtr}}" class="tab">
+                        <p>{{ image_name }}_{{ filtr }}{{image_extension}}</p>
+                         <img src="{{image_s3_dir}}/{{image_name}}_{{filtr}}{{image_extension}}" alt="{{image_name}}_{{ filtr}}{{image_extension}}" />
                     </div>
                 {% endfor %}
             </div>
