@@ -1,5 +1,6 @@
 import os
 import boto3
+import urllib2
 from boto3.session import Session
 from io import BytesIO
 
@@ -14,6 +15,7 @@ from django_rq import job
 # Model
 class UploadedImage(models.Model):
     def __init__(self, image_file):
+        # TODO: don't store file on disk
         if not os.path.exists(settings.MEDIA_ROOT):
             os.makedirs(settings.MEDIA_ROOT)
         self.local_path = default_storage.save(settings.MEDIA_ROOT + '/', ContentFile(image_file.read()))
@@ -21,14 +23,14 @@ class UploadedImage(models.Model):
         self.size = image_file.size
 
         # Save file in Amazon S3 bucket
+        self.s3_path = self.local_path[len(settings.MEDIA_ROOT)+1:] + '/' + image_file.name
+        session = Session(aws_access_key_id=settings.AWS_ACCESS_KEY,
+                  aws_secret_access_key=settings.AWS_SECRET_KEY,
+                  region_name=settings.REGION_NAME)
+        s3 = session.resource('s3')
+        bitstream = open(self.local_path, 'rb')
         try:
-            self.s3_path = self.local_path[len(settings.MEDIA_ROOT)+1:] + '/' + image_file.name
-            session = Session(aws_access_key_id=settings.AWS_ACCESS_KEY,
-                      aws_secret_access_key=settings.AWS_SECRET_KEY,
-                      region_name=settings.REGION_NAME)
-            s3 = session.resource('s3')
-            bitstream = open(self.local_path, 'rb')
-            s3.Bucket(settings.S3_BUCKET).put_object(Key=self.s3_path, Body=bitstream)
+            s3.Bucket(settings.S3_BUCKET).put_object(Key=self.s3_path, Body=bitstream, ACL='public-read')
         except ClientError:
             # Error: impossible to access the bucket
             raise
@@ -61,7 +63,7 @@ def apply_filter(pickled_img, option, target_url):
     created image in the Amazon S3 bucket, under the path given as target_url.
     The arguments are :
         - pickled_img: a dictinary containing the following elements
-                'local_path': image path on the local drive
+                'image_s3_dir': image path in the Amazon S3 bucket
                 'name': original image name (without extension)
                 'ext': original image extension
         - option: the name of the filter to be applied. Valid filters are BLUR, CONTOUR, 
@@ -70,8 +72,11 @@ def apply_filter(pickled_img, option, target_url):
         - target_url: the path to be used to store the result, in the S3 bucket defined 
                 in the settings
     """
-
-    im = Image.open(pickled_img['local_path'])
+    # Get picture from Amazon S3 bucket
+    url = pickled_img['image_s3_dir'] + '/' + pickled_img['name'] + pickled_img['ext']
+    image_file = BytesIO(urllib2.urlopen(url).read())
+    im = Image.open(image_file)
+    # im = Image.open(pickled_img['local_path'])
 
     if option == 'BLUR':
         im = im.filter(ImageFilter.BLUR)
@@ -103,7 +108,11 @@ def apply_filter(pickled_img, option, target_url):
     s3 = session.resource('s3')
     cimage = BytesIO()
     im.save(cimage, format=guess_image_format(pickled_img['ext']))
-    s3.Bucket(settings.S3_BUCKET).put_object(Key=target_url, Body=cimage.getvalue())
+    try:
+        s3.Bucket(settings.S3_BUCKET).put_object(Key=target_url, Body=cimage.getvalue(), ACL='public-read')
+    except ClientError:
+        # Error: impossible to access the bucket
+        raise
 
     return target_url
 
@@ -132,4 +141,7 @@ def guess_image_format(ext):
         ".xbm": "XBM",
         ".xpm": "XPM",
     }
-    return ext_dict[ext]
+    if ext in ext_dict:
+        return ext_dict[ext]
+    else:
+        raise NotImplementedError('Extension "' + ext + '" not recognized!')

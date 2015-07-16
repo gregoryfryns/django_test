@@ -44,12 +44,13 @@ def imageconv(request):
             # Store new info in session
             request.session['image_name'] = image.get_name()
             request.session['image_size'] = filesizeformat(image.get_size())
-            request.session['image_s3_dir'] = settings.AWS_S3_BASE_URL + os.path.split(image.get_s3_path())[0]
+            image_s3_dir = settings.AWS_S3_BASE_URL + os.path.split(image.get_s3_path())[0]
+            request.session['image_s3_dir'] = image_s3_dir
             request.session['image_extension'] = image.get_ext()
 
             # Prepare image for handling by worker process
             pickled_img = {
-                'local_path': image.get_local_path(),
+                'image_s3_dir': image_s3_dir,
                 'name': image.get_name(),
                 'ext': image.get_ext(),
             }

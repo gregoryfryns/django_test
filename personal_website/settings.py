@@ -18,7 +18,6 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
-# SECRET_KEY = 'jg_-g)3!(xt(k2j=0hid(fa+16hjgc*=h(+5wh=q79kt0*k7s%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -62,16 +61,6 @@ WSGI_APPLICATION = 'personal_website.wsgi.application'
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 DATABASES = {'default': dj_database_url.config()}
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'mydb',
-#         'USER': 'postgres',
-#         'PASSWORD': 'password',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -119,11 +108,10 @@ MEDIA_URL = '/tmp/media/'
 # 1MB - 1048576
 # 2.5MB - 2621440
 # 5MB - 5242880
-# 10MB - 10485760
 MAX_UPLOAD_SIZE = "2621440"
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
+# https://docs.djangoproject.com/en/1.7/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
