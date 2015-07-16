@@ -10,6 +10,7 @@ Here are some details about the applications you'll find here:
 - *imageconv*: the aim of this application is to use a form to load media files, use form validation and use a background process to handle time-consuming tasks. It also stores temporary files to Amazon S3.
 
 *** Getting started ***
+
 First make sure the requirements are fulfilled:
 - Python 2.7
 - pip (python-pip)
