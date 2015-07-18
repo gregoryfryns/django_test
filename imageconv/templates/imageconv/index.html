@@ -25,13 +25,14 @@
             <div class="tab-content">
                 <div id="default" class="tab active">
                     <p>{{image_name}}{{image_extension}}</p>
+                    <!-- <img src="{{image_local_path}}" alt="{{image_name}}{{image_extension}}" /> -->
                     <img src="{{image_s3_dir}}/{{image_name}}{{image_extension}}" alt="{{image_name}}{{image_extension}}" />
                 </div>
 
                 {% for filtr in applied_filters %}
                     <div id="{{filtr}}" class="tab">
                         <p>{{ image_name }}_{{ filtr }}{{image_extension}}</p>
-                         <img src="{{image_s3_dir}}/{{image_name}}_{{filtr}}{{image_extension}}" alt="{{image_name}}_{{ filtr}}{{image_extension}}" />
+                         <img src="../static/images/spinner.gif" target="{{image_s3_dir}}/{{image_name}}_{{filtr}}{{image_extension}}" alt="{{image_name}}_{{ filtr}}{{image_extension}}" />
                     </div>
                 {% endfor %}
             </div>

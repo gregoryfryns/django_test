@@ -22,6 +22,7 @@ def imageconv(request):
     image_extension = None
     image_size = None
     image_s3_dir = None
+    image_local_path = None
 
     if 'image_name' in request.session:
         image_name = request.session['image_name']
@@ -35,6 +36,9 @@ def imageconv(request):
     if 'image_s3_dir' in request.session:
         image_s3_dir = request.session['image_s3_dir']
 
+    if 'image_local_path' in request.session:
+        image_local_path = request.session['image_local_path']
+
     # Handle the file uploaded via the form
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
@@ -47,6 +51,7 @@ def imageconv(request):
             image_s3_dir = settings.AWS_S3_BASE_URL + os.path.split(image.get_s3_path())[0]
             request.session['image_s3_dir'] = image_s3_dir
             request.session['image_extension'] = image.get_ext()
+            request.session['image_local_path'] = image.get_local_path()
 
             # Prepare image for handling by worker process
             pickled_img = {
@@ -76,6 +81,7 @@ def imageconv(request):
                'applied_filters': applied_filters,
                'form': form,
                'max_upload_size': filesizeformat(settings.MAX_UPLOAD_SIZE),
+               'image_local_path': image_local_path,
     }
 
     return render_to_response(

@@ -15,7 +15,7 @@ body
     margin: 0;
     padding: 0;
     color: #333;
-    font: 13px Trebuchet, Lucida Sans Unicode, Arial, sans-serif;
+    font: 13px "Trebuchet", "Lucida Sans Unicode", "Arial", sans-serif;
     background: #E2EBED;
     text-align: center;
     }
@@ -111,7 +111,7 @@ header
     margin: 0;
     padding: 20px 30px;
     color: #fff;
-    font: 14px/150% Trebuchet MS;
+    font: 14px/150% "Trebuchet MS";
     font-weight:400;
     }
 
