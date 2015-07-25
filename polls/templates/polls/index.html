@@ -4,12 +4,14 @@
 {% block main-contents %}
 	<h2>Poll list</h2>
 	{% if latest_poll_list %}
-	    <ul>
-	    {% for poll in latest_poll_list %}
-	        <li><a href="{% url 'polls:detail' poll.id %}">{{ poll.question }}</a></li>
-	    {% endfor %}
-	    </ul>
+		<p>
+		    <ul class='poll-list'>
+		    {% for poll in latest_poll_list %}
+		        <li class='poll-item'><a href="{% url 'polls:detail' poll.id %}">{{ poll.question }}</a></li>
+		    {% endfor %}
+		    </ul>
+	    </p>
 	{% else %}
-	    <p>No polls are available.</p>
+	    <p class='poll-item no-polls'>No polls are available.</p>
 	{% endif %}
 {% endblock %}

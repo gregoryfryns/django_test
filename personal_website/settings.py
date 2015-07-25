@@ -126,4 +126,5 @@ USE_L10N = True
 USE_TZ = True
 
 # Sessions lifespan
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 30 * 60 #Cookies deleted after 30 minutes
