@@ -15,7 +15,7 @@ jQuery(document).ready(function() {
     // Load filtered images when available
     $('.tabs .tab-content .tab img').each(function() {
     	var $this = $(this);
-    	updateImage($this, 300);
+    	updateImage($this, 500);
     });
 
 });
@@ -27,7 +27,7 @@ function updateImage($imageElt, timeout)
         url: $imageElt.attr('target'),
         error : function(){
         	$imageElt.attr('src','../static/images/spinner.gif');
-            setTimeout(function(){ updateImage($imageElt, 2 * timeout); }, timeout);
+            setTimeout(function(){ updateImage($imageElt, timeout); }, timeout);
         },
         success : function(data) {
             $imageElt.attr('src',$imageElt.attr('target'));

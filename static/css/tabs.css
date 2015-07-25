@@ -24,14 +24,12 @@
             border-radius:5px 5px 0px 0px;
 			background: #d5eaf0;
             font-size:14px;
-            /*font-weight:600;*/
             color:#4c4c4c;
             transition:all linear 0.15s;
 			text-decoration:none;
         }
  
         .tab-links a:hover {
-			/*background:#71b7ca;*/
     		-moz-box-shadow: 0px 0px 10px #307082;
     		-webkit-box-shadow: 0px 0px 10px #307082;
     		box-shadow: 0px 0px 10px #307082;
