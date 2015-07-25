@@ -65,7 +65,7 @@ DATABASES = {'default': dj_database_url.config()}
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Django-RQ configuration
+# Django-RQ queues configuration
 RQ_QUEUES = {
     'default': {
         'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379'),
@@ -87,7 +87,7 @@ RQ_QUEUES = {
 AWS_ACCESS_KEY = os.environ['AWS_ACCESS_KEY']
 AWS_SECRET_KEY = os.environ['AWS_SECRET_KEY']
 REGION_NAME = 'us-west-1'
-S3_BUCKET = os.environ['S3_BUCKET'] # Object created in this bucket will be deleted after 1 day
+S3_BUCKET = os.environ['S3_BUCKET'] # Bucket configured to delete objects after 1 day
 AWS_S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/gfryns-webpage/'
 
 # Static asset configuration
@@ -98,12 +98,14 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 # Media file folders (for uploads)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'tmp/media')
 MEDIA_URL = '/tmp/media/'
 
+# Maximum size for images uploaded in the image conversion app
 # 150 kB - 153600
 # 1MB - 1048576
 # 2.5MB - 2621440

@@ -76,7 +76,6 @@ def apply_filter(pickled_img, option, target_url):
     url = pickled_img['image_s3_dir'] + '/' + pickled_img['name'] + pickled_img['ext']
     image_file = BytesIO(urllib2.urlopen(url).read())
     im = Image.open(image_file)
-    # im = Image.open(pickled_img['local_path'])
 
     if option == 'BLUR':
         im = im.filter(ImageFilter.BLUR)
