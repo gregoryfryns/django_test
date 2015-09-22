@@ -7,7 +7,6 @@ from django.conf.urls.static import static
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
     url(r'^$', TemplateView.as_view(template_name='home.html'), name="home"),
     # url(r'^blog/', include('blog.urls')),
     url(r'^weather/', include('weather.urls', namespace="weather")),

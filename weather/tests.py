@@ -1,5 +1,5 @@
 from django.test import TestCase
-from weather.models import Weather
+from weather.models import AbstractWeatherReport, OpenWeatherMapReport
 
 # Create your tests here.
 class WeatherReportTests(TestCase):
@@ -8,12 +8,14 @@ class WeatherReportTests(TestCase):
         If a correct zip code is entered, openweathermap should return the weather report
         for this area.
         """
-        weather = Weather('94025','US')
-        self.assertEqual(weather.location, 'Menlo Park')
+        weather = OpenWeatherMapReport('94025','US')
+        weather.update()
+        self.assertEqual(weather.location, 'West Menlo Park')
 
     def test_incorrect_zip_code_entered(self):
         """
         If an incorrect zip code is entered, an appropriate error message should be returned to the view
         """
-        weather = Weather('X0000','XXX')
-        self.assertEqual(isinstance(weather.error_msg, str), True)
+        weather = OpenWeatherMapReport('X0000','XXX')
+        weather.update()
+        self.assertNotEqual(weather.error_msg, None)
